@@ -4,11 +4,13 @@ LIBS := -lm
 OBJDIR = objects
 SRCDIR = source
 
+OBJECTS = $(OBJDIR)/tDocument.o $(OBJDIR)/tNewsLetter.o $(OBJDIR)/tWord.o $(OBJDIR)/tClass.o
+ALL_OBJECTS = $(shell find . -type f -name "*.o" -print) 
 
+all: prog1 prog2 prog3 build_libs
 
-OBJECTS = $(OBJDIR)/tDocument.o $(OBJDIR)/tNewsLetter.o $(OBJDIR)/tWord.o $(OBJDIR)/tClass.o 
-
-all: prog1 prog2 prog3
+build_libs: $(ALL_OBJECTS)
+	ar -rcs libTP2.a $(ALL_OBJECTS)
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
@@ -41,3 +43,4 @@ clean:
 	rm -r $(OBJDIR)
 	rm -f *.bin
 	rm -f *.txt
+	rm -f *.a
